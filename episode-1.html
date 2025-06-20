@@ -19,6 +19,28 @@
   <meta name="twitter:image" content="https://rahulanddesign.github.io/spirit-of-earth/episode1-thumbnail.jpg">
 
   <style>
+
+    .hero {
+  background-image: url('https://rahulanddesign.github.io/spirit-of-earth/episode1-thumbnail.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: white;
+  text-align: center;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.4); /* Optional: soft overlay */
+  padding: 30px;
+  width: 100%;
+}
+
     body {
       font-family: 'Georgia', serif;
       background: #f8f4ef;
@@ -52,8 +74,12 @@
 </head>
 <body>
 
-  <h1>Episode 1: The Ritual Begins</h1>
-  <h2>“Ashes of Oil, Seeds of Earth”</h2>
+  <div class="hero">
+    <div class="overlay">
+      <h1>Episode 1: The Ritual Begins</h1>
+      <h2>“Ashes of Oil, Seeds of Earth”</h2>
+    </div>
+  </div>
 
   <p>In the shadow of Dubai’s shimmering towers, where the sand meets steel and silence hums beneath the air conditioning, something ancient stirs.</p>
 
