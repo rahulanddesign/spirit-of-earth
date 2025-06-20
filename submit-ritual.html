@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Contribute Your Ritual – Spirit of Earth</title>
+  <title>Share Ritual – Spirit of Earth</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Social Share Preview -->
@@ -11,6 +11,90 @@
   <meta property="og:image" content="https://rahulanddesign.github.io/spirit-of-earth/episode1-thumbnail.jpg">
   <meta property="og:url" content="https://rahulanddesign.github.io/spirit-of-earth/submit-ritual.html">
   <meta property="og:type" content="website">
+
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #f6f1e9;
+      color: #2c2c2c;
+      padding: 40px 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      color: #4b2e2e;
+    }
+    textarea, input {
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      font-size: 1em;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #5d321c;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1.1em;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #8e5d3e;
+    }
+    .signature {
+      margin-top: 20px;
+      background: #fff4e6;
+      padding: 10px;
+      border-left: 5px solid #5d321c;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Submit Your Ritual</h1>
+  <p>Write your ritual experience with the five elements. When you're ready, add your name and a secret key. This will create your unique ritual signature.</p>
+
+  <label for="ritual">Your Ritual Journal</label>
+  <textarea id="ritual" rows="12" placeholder="Describe your ritual, your connection to Earth, and your story..."></textarea>
+
+  <label for="name">Your Name (or nickname)</label>
+  <input type="text" id="name" placeholder="e.g., rahul" />
+
+  <label for="key">Your Key (something memorable)</label>
+  <input type="text" id="key" placeholder="e.g., 34sky" />
+
+  <button onclick="generateSignature()">Done → Generate My Signature</button>
+
+  <div id="output" class="signature" style="display:none;">
+    <p><strong>Your Ritual Signature:</strong></p>
+    <p id="signatureText" style="font-size:1.2em;"></p>
+    <p>Save this signature. It will be your identity to revisit or edit this ritual later.</p>
+  </div>
+
+  <script>
+    function generateSignature() {
+      const name = document.getElementById('name').value.trim();
+      const key = document.getElementById('key').value.trim();
+      const ritual = document.getElementById('ritual').value.trim();
+
+      if (!name || !key || !ritual) {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      const signature = `${name}<${key}>SpiritOfEarth`;
+      document.getElementById('signatureText').textContent = signature;
+      document.getElementById('output').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
+
 
   <style>
     body {
