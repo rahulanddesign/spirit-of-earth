@@ -63,26 +63,31 @@
 
     /* Floating prologue scroll */
     .overlay {
+  overflow-y: auto;
       position: fixed;
       top: 0; left: 0;
-      width: 100%; height: 100%;
+      width: 100%; min-height: 100vh;
       background: rgba(40, 30, 20, 0.92);
       color: #f8f2ea;
-      display: flex;
+      display: flex; padding-top: 60px; padding-bottom: 60px;
       align-items: center;
       justify-content: center;
       z-index: 1000;
-      transition: opacity 0.8s ease;
+      padding: 20px;
     }
 
     .scroll-box {
+  max-height: 90vh;
+  overflow-y: auto;
       background: #3b2e25;
       padding: 2em;
       max-width: 700px;
+      width: 100%;
       border: 2px solid #c9b396;
       box-shadow: 0 0 40px rgba(0,0,0,0.3);
       border-radius: 10px;
       position: relative;
+      text-align: center;
     }
 
     .scroll-box h2 {
@@ -97,24 +102,35 @@
       margin-bottom: 1em;
     }
 
-    .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      background: none;
+    .begin-btn {
+      margin-top: 1.5em;
+      background: #dac29b;
       border: none;
-      color: #f4f0e8;
-      font-size: 1.5em;
+      padding: 12px 25px;
+      font-size: 1em;
+      font-weight: bold;
+      color: #2c1a0e;
+      border-radius: 5px;
       cursor: pointer;
+      transition: background 0.3s ease;
     }
+
+    .begin-btn:hover {
+      background: #efd6a6;
+    }
+
   </style>
+  <script>
+    function closePrologue() {
+      document.getElementById('prologue').style.display = 'none';
+    }
+  </script>
 </head>
 <body>
 
 <!-- Floating Scroll Prologue -->
 <div class="overlay" id="prologue">
   <div class="scroll-box">
-    <button class="close-btn" onclick="document.getElementById('prologue').style.display='none'">×</button>
     <h2>Prologue: The Breath Beneath Cities</h2>
     <p>Before the cement.<br>Before the countdowns and currencies.<br>Before flags and forecasts — there was <em>Earth</em>.</p>
     <p>Every tribe once knew:<br>
@@ -129,6 +145,7 @@
     Not a play to be watched — but a pulse to be remembered.</p>
     <p>This is not a movement.<br>This is a return.</p>
     <p>Begin where you are.<br>Touch what’s beneath your feet.<br>And write your ritual back into the Earth.</p>
+    <button class="begin-btn" onclick="closePrologue()">Begin the Journey</button>
   </div>
 </div>
 
