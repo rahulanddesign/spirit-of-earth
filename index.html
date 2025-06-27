@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ritual Library</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background: #fdfaf5;
+      color: #3a2e25;
+      margin: 0;
+      display: flex;
+      height: 100vh;
+    }
+    .sidebar {
+      width: 260px;
+      background: #f5ede3;
+      padding: 1rem;
+      overflow-y: auto;
+      border-right: 2px solid #e2d2c2;
+    }
+    .sidebar h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: #5a3e2b;
+      border-bottom: 1px solid #c7a77a;
+      padding-bottom: 0.2rem;
+    }
+    .sidebar details {
+      margin-bottom: 1rem;
+    }
+    .sidebar summary {
+      cursor: pointer;
+      font-weight: bold;
+      color: #7b4b2a;
+    }
+    .sidebar ul {
+      list-style-type: none;
+      padding-left: 1rem;
+    }
+    .sidebar li {
+      margin: 0.3rem 0;
+      cursor: pointer;
+      color: #5c3d2e;
+    }
+    .sidebar li:hover {
+      text-decoration: underline;
+    }
+    .sidebar li.active {
+      font-weight: bold;
+      text-decoration: underline;
+      background-color: #eaddcf;
+      padding-left: 4px;
+    }
+    .content {
+      padding: 2rem;
+      overflow-y: auto;
+      flex-grow: 1;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 2rem;
+      color: #7b4b2a;
+    }
+    h2 {
+      font-size: 1.4rem;
+      color: #5c3d2e;
+    }
+    .quote {
+      font-style: italic;
+      background: #fff7ea;
+      padding: 1rem;
+      border-left: 4px solid #c7a77a;
+      margin-bottom: 2rem;
+    }
+    ul, p {
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+      body.menu-open .sidebar {
+        display: block;
+        position: absolute;
+        z-index: 1000;
+        height: 100vh;
+      }
+    }
+  </style>
+  <script src="js/rituals.js" defer></script>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>📚 Ritual Folders</h2>
+    <details open>
+      <summary>🌀 Bharata</summary>
+      <ul>
+        <li data-file="henna-daughter">Henna from Daughter</li>
+        <li data-file="bhoomi-car">Bhoomi: Naming the Car</li>
+      </ul>
+    </details>
+    <details>
+      <summary>🌍 Ntu</summary>
+      <ul>
+        <li data-file="walking-ancestors">Walking with Ancestors</li>
+      </ul>
+    </details>
+    <details>
+      <summary>✨ Zameen-e-Nūr</summary>
+      <ul>
+        <li data-file="coffee-blessings">Coffee Grounds and Blessings</li>
+      </ul>
+    </details>
+    <details>
+      <summary>🌊 Nusantara</summary>
+      <ul>
+        <li>Coming Soon</li>
+      </ul>
+    </details>
+    <details>
+      <summary>🐢 Turtle Island</summary>
+      <ul>
+        <li>Coming Soon</li>
+      </ul>
+    </details>
+    <details>
+      <summary>🧺 My Shared Rituals</summary>
+      <ul>
+        <li>Ritual Draft 1</li>
+      </ul>
+    </details>
+  </div>
+
+  <div class="content"></div>
+</body>
+</html>
