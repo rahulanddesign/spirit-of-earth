@@ -1,6 +1,6 @@
 function showRitual(title, content) {
   const contentDiv = document.querySelector('.content');
-  contentDiv.innerHTML = `<h1>${title}</h1>${content}`;
+  contentDiv.innerHTML = `${content}`;
   if (window.innerWidth <= 768) {
     document.body.classList.remove('menu-open');
   }
