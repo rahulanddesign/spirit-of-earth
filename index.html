@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+Always show details
+from pathlib import Path
+import zipfile
+
+# Define file contents
+index_html = """<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -78,23 +83,7 @@
     ul, p {
       margin-bottom: 1rem;
     }
-    #menu-toggle {
-      display: none;
-      position: fixed;
-      top: 1rem;
-      left: 1rem;
-      z-index: 1100;
-      background: #7b4b2a;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      font-size: 1.2rem;
-      border-radius: 4px;
-    }
     @media (max-width: 768px) {
-      #menu-toggle {
-        display: block;
-      }
       .sidebar {
         display: none;
       }
@@ -103,22 +92,19 @@
         position: absolute;
         z-index: 1000;
         height: 100vh;
-        background: #f5ede3;
       }
     }
   </style>
   <script src="js/rituals.js" defer></script>
 </head>
 <body>
-  <button id="menu-toggle">☰ Menu</button>
-
   <div class="sidebar">
     <h2>📚 Ritual Folders</h2>
     <details open>
       <summary>🌀 Bharata</summary>
       <ul>
-        <li data-file="henna-daughter">d</li>
-        <li data-file="bhoomi-car">f</li>
+        <li data-file="henna-daughter">Henna from Daughter</li>
+        <li data-file="bhoomi-car">Bhoomi: Naming the Car</li>
       </ul>
     </details>
     <details>
@@ -154,11 +140,5 @@
   </div>
 
   <div class="content"></div>
-
-  <script>
-    document.getElementById('menu-toggle').addEventListener('click', function () {
-      document.body.classList.toggle('menu-open');
-    });
-  </script>
 </body>
 </html>
