@@ -1,205 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Spirit of Earth – A Living Rasa Play</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ritual Library</title>
   <style>
     body {
       font-family: 'Georgia', serif;
-      background: #f6f1e9;
+      background: #fdfaf5;
+      color: #3a2e25;
       margin: 0;
-      padding: 40px 20px;
-      color: #2c2c2c;
-      line-height: 1.6;
+      display: flex;
+      height: 100vh;
     }
-
-    h1 {
-      font-size: 2.8em;
-      color: #4b2e2e;
-      margin-bottom: 0.3em;
+    .sidebar {
+      width: 260px;
+      background: #f5ede3;
+      padding: 1rem;
+      overflow-y: auto;
+      border-right: 2px solid #e2d2c2;
     }
-
-    h2 {
-      font-size: 1.8em;
-      color: #5d3e33;
-      margin-top: 1.5em;
+    .sidebar h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: #5a3e2b;
+      border-bottom: 1px solid #c7a77a;
+      padding-bottom: 0.2rem;
     }
-
-    p {
-      max-width: 800px;
-      margin-bottom: 1em;
-      font-size: 1.15em;
+    .sidebar details {
+      margin-bottom: 1rem;
     }
-
-    .episode {
-      margin-top: 2em;
-      padding: 1em;
-      background: #ffffff;
-      border-left: 5px solid #8e735b;
-      box-shadow: 0 0 5px rgba(0,0,0,0.05);
+    .sidebar summary {
+      cursor: pointer;
+      font-weight: bold;
+      color: #7b4b2a;
     }
-
-    .episode h3 {
-      margin-top: 0;
-      color: #3d2a22;
+    .sidebar ul {
+      list-style-type: none;
+      padding-left: 1rem;
     }
-
-    footer {
-      margin-top: 4em;
-      font-size: 0.9em;
-      color: #666;
+    .sidebar li {
+      margin: 0.3rem 0;
+      cursor: pointer;
+      color: #5c3d2e;
     }
-
-    a {
-      color: #704214;
-      text-decoration: none;
-    }
-
-    a:hover {
+    .sidebar li:hover {
       text-decoration: underline;
     }
-
-    /* Floating prologue scroll */
-    .overlay {
+    .content {
+      padding: 2rem;
       overflow-y: auto;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; min-height: 100vh;
-      background: rgba(40, 30, 20, 0.92);
-      color: #f8f2ea;
-      display: flex;
-      padding-top: 60px;
-      padding-bottom: 60px;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
+      flex-grow: 1;
+      max-width: 800px;
+      margin: 0 auto;
     }
-
-    .scroll-box {
-      max-height: 90vh;
-      overflow-y: auto;
-      background: #3b2e25;
-      padding: 2em;
-      max-width: 700px;
-      width: 100%;
-      border: 2px solid #c9b396;
-      box-shadow: 0 0 40px rgba(0,0,0,0.3);
-      border-radius: 10px;
-      position: relative;
-      text-align: center;
+    h1 {
+      font-size: 2rem;
+      color: #7b4b2a;
     }
-
-    .scroll-box h2 {
-      margin-top: 0;
-      color: #e9dbbe;
-      font-size: 1.8em;
+    h2 {
+      font-size: 1.4rem;
+      color: #5c3d2e;
     }
-
-    .scroll-box p {
-      line-height: 1.6;
-      font-size: 1.1em;
-      margin-bottom: 1em;
+    .quote {
+      font-style: italic;
+      background: #fff7ea;
+      padding: 1rem;
+      border-left: 4px solid #c7a77a;
+      margin-bottom: 2rem;
     }
-
-    .begin-btn {
-      margin-top: 1.5em;
-      background: #dac29b;
-      border: none;
-      padding: 12px 25px;
-      font-size: 1em;
-      font-weight: bold;
-      color: #2c1a0e;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s ease;
+    ul, p {
+      margin-bottom: 1rem;
     }
-
-    .begin-btn:hover {
-      background: #efd6a6;
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+      body.menu-open .sidebar {
+        display: block;
+        position: absolute;
+        z-index: 1000;
+        height: 100vh;
+      }
     }
-
   </style>
   <script>
-    function closePrologue() {
-      document.getElementById('prologue').style.display = 'none';
+    function showRitual(title, content) {
+      const contentDiv = document.querySelector('.content');
+      contentDiv.innerHTML = `<h1>${title}</h1>${content}`;
+      if (window.innerWidth <= 768) {
+        document.body.classList.remove('menu-open');
+      }
     }
+
+    async function loadRitual(fileName, title) {
+      const response = await fetch(`rituals/${fileName}.html`);
+      const html = await response.text();
+      showRitual(title, html);
+    }
+
+    window.onload = () => {
+      const rituals = document.querySelectorAll('.sidebar li');
+      rituals.forEach(ritual => {
+        ritual.addEventListener('click', () => {
+          const file = ritual.getAttribute('data-file');
+          const title = ritual.textContent;
+          if (file) {
+            loadRitual(file, title);
+          } else {
+            showRitual(title, `<p><em>This is a placeholder for: ${title}</em></p>`);
+          }
+        });
+      });
+      showRitual("🌱 Spirit of Earth", `
+        <div class="quote">
+          "Weaving rituals, stories, and elemental consciousness into one scroll of remembrance."
+        </div>
+        <textarea rows="10" style="width:100%; padding:1rem; font-family:Georgia,serif;"></textarea><br><br>
+        <button onclick="alert('Will be shared into sacred space soon')" style="padding:0.5rem 1rem; background:#7b4b2a; color:white; border:none; cursor:pointer;">Share</button>
+      `);
+    };
   </script>
 </head>
 <body>
-
-<!-- Floating Scroll Prologue -->
-<div class="overlay" id="prologue">
-  <div class="scroll-box">
-    <h2>Prologue: The Breath Beneath Cities</h2>
-    <p>Before the cement.<br>Before the countdowns and currencies.<br>Before flags and forecasts — there was <em>Earth</em>.</p>
-    <p>Every tribe once knew:<br>
-    to rise with the Sun,<br>
-    to wash with Rain,<br>https://rahulanddesign.github.io/spirit-of-earth/
-    to burn with Fire,<br>
-    to root in Soil,<br>
-    and to breathe with the Wind.</p>
-    <p>These weren’t beliefs. They were rhythms.</p>
-    <p>And somewhere between screens and skylines, we forgot.</p>
-    <p><strong><em>The Spirit of Earth</em></strong> is a living scroll.<br>
-    Not a play to be watched — but a pulse to be remembered.</p>
-    <p>This is not a movement.<br>This is a return.</p>
-    <p>Begin where you are.<br>Touch what’s beneath your feet.<br>And write your ritual back into the Earth.</p>
-    <button class="begin-btn" onclick="closePrologue()">Begin the Journey</button>
+  <div class="sidebar">
+    <h2>📚 Ritual Folders</h2>
+    <details open>
+      <summary>🌀 Bharata</summary>
+      <ul>
+        <li data-file="henna-daughter">Henna from Daughter</li>
+        <li data-file="bhoomi-car">Bhoomi: Naming the Car</li>
+      </ul>
+    </details>
+    <details>
+      <summary>🌍 Ntu</summary>
+      <ul>
+        <li data-file="walking-ancestors">Walking with Ancestors</li>
+      </ul>
+    </details>
+    <details>
+      <summary>✨ Zameen-e-Nūr</summary>
+      <ul>
+        <li data-file="coffee-blessings">Coffee Grounds and Blessings</li>
+      </ul>
+    </details>
+    <details>
+      <summary>🌊 Nusantara</summary>
+      <ul>
+        <li>Coming Soon</li>
+      </ul>
+    </details>
+    <details>
+      <summary>🐢 Turtle Island</summary>
+      <ul>
+        <li>Coming Soon</li>
+      </ul>
+    </details>
+    <details>
+      <summary>🧺 My Shared Rituals</summary>
+      <ul>
+        <li>Ritual Draft 1</li>
+      </ul>
+    </details>
   </div>
-</div>
 
-<!-- Main Index Content -->
-<h1>Spirit of Earth</h1>
-<p>A living Rasa Play unfolding across tribes, cities, and continents — weaving rituals, stories, and elemental consciousness into one scroll of remembrance.</p>
-
-<h2>🌍 Series Timeline</h2>
-
-<div class="episode">
-  <h3>Episode 1 – “Ashes of Oil, Seeds of Earth”</h3>
-  <p><strong>Region:</strong> Dubai, Middle East</p>
-  <p><a href="episode-1.html">Read Episode →</a></p>
-  <p>A mother and son begin a ritual on a balcony. Earth is touched again in the shadow of towers. Stories from Middle Eastern gardens will slowly unfold, weaving in voices of modern rituals.</p>
-</div>
-
-<div class="episode">
-  <h3>Episode 2 – “Roots Beneath the Monsoon”</h3>
-  <p><strong>Region:</strong> Kerala, South India</p>
-  <p>Begins with a triangular bed, companion planting, and barefoot mud rituals. A landscape of abundance and deep water memory.</p>
-</div>
-
-<div class="episode">
-  <h3>Episode 3 – “Clay of the Ancestors”</h3>
-  <p><strong>Region:</strong> Africa</p>
-  <p>The wisdom of fire pits, soil huts, and grounding drums. Africa offers earth's deepest pulse and longest echo.</p>
-</div>
-
-<div class="episode">
-  <h3>Episode 4 – “Between Mountains and Memory”</h3>
-  <p><strong>Region:</strong> Pakistan</p>
-  <p>Stone, snow, salt, and story. Where rituals still hold warmth in wool, clay, and chai.</p>
-</div>
-
-<div class="episode">
-  <h3>Episode 5 – “Rain Among the Palms”</h3>
-  <p><strong>Region:</strong> Malaysia</p>
-  <p>Bamboo, mist, and quiet jungle rituals. Offerings in still water and harmony with rainfall.</p>
-</div>
-
-<!-- ✨ Ritual Invitation -->
-<h2 style="text-align: center; margin-top: 3em;">🌿 Join the Living Scroll</h2>
-<div style="text-align: center; margin: 2em 0;">
-  <a href="https://rahulanddesign.github.io/spirit-of-earth/submit-ritual.html" style="display: inline-block; padding: 14px 24px; background-color: #5d321c; color: white; text-decoration: none; font-size: 1.1em; border-radius: 8px; transition: background 0.3s ease;">
-    ✨ Submit Your Ritual
-  </a>
-</div>
-
-<h2>🌱 Vision</h2>
-<p>The Spirit of Earth is not bound by nation. Each episode awakens forgotten knowledge from a tribal past — one that respected the five elements through ritual, not religion. As this play unfolds, a decentralized remembering emerges. People begin to feel again. To observe again. To live with the elements around them — wherever they are.</p>
-
-<footer>
-  © Created and Dreamed by Rakku & Aethera
-</footer>
-
+  <div class="content"></div>
 </body>
 </html>
